@@ -64,6 +64,9 @@ body{
     bottom:  55px;
     overflow:  auto;
     width:  100%;
+    background: url(http://images4.fanpop.com/image/photos/24400000/Pikachu-Wallpaper-pikachu-24422802-1280-800.jpg);
+    background-repeat: no-repeat;
+    background-size: 750px 630px;
     background-color:  RGB(238, 238, 238);
 }
 .chat-room-wrapper .panel-footer {
@@ -91,7 +94,7 @@ body{
     margin-left:  10px;
     width:  20px;
     height:  20px;
-    background:  lightgray;
+    background:  yellow;
     display:  inline-block;
     border-radius:  50%;
     color:  crimson;
