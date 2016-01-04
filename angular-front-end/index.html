@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Hans Chat</title>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/app.css"/>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/scripts/app.js"></script>
+</head>
+<body ng-app="chatRoom" ng-controller="chatCtrl">
+
+<!-- chat room -->
+
+<div class="chat-room-wrapper" ng-show="hasLogined">
+    <div class="online panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Online<span class="user-number">{{users.length-1}}</span></h3>
+            <!-- 'group chat' cannot be counted-->
+        </div>
+        <div class="user-wrapper panel-body">
+        <!-- here is the command -->
+            <user iscurrentreceiver="receiver===user.nickname" info="user" ng-click="setReceiver(user.nickname)" ng-repeat="user in users"></user>
+        </div>
+    </div>
+    <div class="chat-room panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{receiver?receiver:"Public Chat"}}</h3>
+        </div>
+        <div class="message-wrapper panel-body">
+        <!-- here is the command -->
+                <message self="nickname" scrolltothis="scrollToBottom()" info="message" ng-repeat="message in messages"></message>
+        </div>
+        <div class="panel-footer">
+            <form class="post-form form-inline" novalidate name="postform" ng-submit="postMessage()">
+                <input type="text" class="form-control" ng-model="words" placeholder="Type here" required>
+                <button type="submit" class="btn btn-success" ng-disabled="postform.$invalid">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- end of chat room -->
+
+<!-- login form -->
+<div class="userform-wrapper"  ng-show="!hasLogined">
+    <form class="form-inline login" novalidate name="userform" ng-submit="login()">
+        <div class="form-group">
+            <label for="nickname" class="sr-only"></label>
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                <input type="text" class="form-control" id="nickname" placeholder="Your Nickname" ng-model="nickname" required/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="userform.$invalid">Play!</button>
+        <p ng-show="userExisted" class="help-block">A user with this nickname already exists.</p>
+
+    </form>
+</div>
+<!-- end of login form -->
+
+</body>
+</html>

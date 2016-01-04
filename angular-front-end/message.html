@@ -1,0 +1,13 @@
+<div ng-switch on="info.type">
+    <!-- welcome message -->
+    <div class="system-notification" ng-switch-when="welcome"><strong>System:&nbsp;&nbsp;</strong><span>{{info.text}}</span> has joined the chat
+    </div>
+    <!-- message for leaving -->
+    <div class="system-notification" ng-switch-when="bye"><strong>System:&nbsp;&nbsp;</strong>Bye~ 
+        <span>{{info.text}}</span></div>
+    <!-- message -->
+    <div class="message" ng-class="{others:self!==info.from,self:self===info.from}" ng-switch-when="normal">
+        <div class="name-wrapper"><span>{{info.from}} @ </span><span>{{time |  date: 'HH:mm:ss' }}</span></div>
+        <div class="content-wrapper"><span class="content">{{info.text}}</span><span class="avatar"></span></div>
+    </div>
+</div>
